@@ -181,6 +181,8 @@
             gap: 14px;
         }
 
+        
+
         .theme-toggle-btn {
             width: 40px;
             height: 40px;
@@ -225,14 +227,6 @@
             color: var(--text-main);
             font-size: 1.4rem;
             cursor: pointer;
-        }
-
-        .mobile-contact-btn {
-            display: none;
-        }
-
-        .menu-backdrop {
-            display: none;
         }
 
         /* Hero Section */
@@ -1195,90 +1189,25 @@
             .nav-menu {
                 position: fixed;
                 top: 75px;
-                right: 0;
-                left: auto;
-                width: 280px;
-                height: calc(100vh - 75px);
-                background: var(--bg-card);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
+                left: 0;
+                width: 100%;
+                background: var(--header-bg);
+                backdrop-filter: blur(16px);
                 flex-direction: column;
-                justify-content: flex-start;
-                align-items: center;
-                padding: 40px 24px;
-                border-left: 1px solid var(--border-card);
-                border-bottom: none;
-                transform: translateX(100%);
-                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-                box-shadow: -10px 10px 30px rgba(0, 0, 0, 0.2);
+                padding: 24px;
+                border-bottom: 1px solid var(--border-card);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
             }
 
             .nav-menu.active {
-                transform: translateX(0);
+                transform: translateY(0);
             }
 
             .nav-links {
                 flex-direction: column;
-                align-items: stretch;
-                width: 100%;
-                gap: 20px;
-            }
-
-            .nav-links li {
-                width: 100%;
-                text-align: center;
-            }
-
-            .nav-links a {
-                display: block;
-                padding: 10px 16px;
-                font-size: 1.05rem;
-                font-weight: 600;
-                border-radius: 8px;
-                transition: all 0.2s ease;
-            }
-
-            .nav-links a:hover {
-                background: rgba(0, 242, 254, 0.08);
-                color: var(--accent-cyan);
-            }
-
-            .nav-right {
-                gap: 10px;
-            }
-
-            .nav-right .contact-btn {
-                display: none;
-            }
-
-            .mobile-contact-btn {
-                display: block !important;
-                margin-top: 24px;
-                text-align: center;
-                width: 100%;
-                padding: 12px;
-                font-size: 0.95rem;
-            }
-
-            .menu-backdrop {
-                display: block;
-                position: fixed;
-                top: 75px;
-                left: 0;
-                width: 100vw;
-                height: calc(100vh - 75px);
-                background: rgba(3, 7, 18, 0.4);
-                backdrop-filter: blur(8px);
-                -webkit-backdrop-filter: blur(8px);
-                z-index: 998;
-                opacity: 0;
-                pointer-events: none;
-                transition: opacity 0.3s ease;
-            }
-
-            .menu-backdrop.active {
-                opacity: 1;
-                pointer-events: auto;
+                align-items: center;
+                gap: 16px;
             }
 
             .achievements-grid {
@@ -1304,7 +1233,6 @@
                     <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
                     <li><a href="#achievements" onclick="toggleMenu()">Achievements</a></li>
                 </ul>
-                <a href="#contact" class="contact-btn mobile-contact-btn" onclick="toggleMenu()">Get In Touch</a>
             </div>
 
             <div class="nav-right">
@@ -1316,9 +1244,6 @@
             </div>
         </div>
     </header>
-
-    <!-- Mobile Menu Backdrop -->
-    <div class="menu-backdrop" id="menuBackdrop" onclick="toggleMenu()"></div>
 
     <!-- Main Content Container -->
     <main>
@@ -1806,22 +1731,6 @@
                 ]
             },
             {
-                id: "jarvis-assistant",
-                title: "Jarvis AI Voice Assistant for Windows",
-                category: "Python OS Automation",
-                shortDesc: "Developed a Python voice assistant to automate Windows tasks, web actions, and system controls.",
-                tech: ["Python", "SpeechRecognition", "PyTTSSX3", "Windows API", "NLP"],
-                githubUrl: "https://github.com/Naveen-Sai-25/Jarvis",
-                bannerImg: "assets/voice_assistant.jpg",
-                detailedSummary: "Designed an intelligent desktop voice assistant powered by Python. Integrates hands-free Windows OS automation, instant web search, AI platform query integration (ChatGPT, Gemini, Claude), real-time dictation, screenshots, and system volume/power controls.",
-                keyFeatures: [
-                    "Hands-free voice command control for Windows OS tasks & application launches",
-                    "Multi-AI platform query integration (ChatGPT, Gemini, Claude, Perplexity)",
-                    "Live voice dictation, speech-to-text, and automated system control",
-                    "Web search automation, clipboard actions, and screenshot capturing"
-                ]
-            },
-            {
                 id: "smart-security",
                 title: "Smart Home Security System",
                 category: "IoT & Embedded Security",
@@ -1935,34 +1844,9 @@
         ];
 
         function toggleMenu() {
-            if (window.innerWidth > 768) return; // Do nothing on desktop views
-            
             const menu = document.getElementById('navMenu');
-            const backdrop = document.getElementById('menuBackdrop');
-            const hamburgerIcon = document.querySelector('.mobile-toggle i');
-            
-            const isActive = menu.classList.toggle('active');
-            if (backdrop) {
-                backdrop.classList.toggle('active', isActive);
-            }
-            
-            if (hamburgerIcon) {
-                hamburgerIcon.className = isActive ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
-            }
+            menu.classList.toggle('active');
         }
-
-        // Clean up classes on resize to desktop width
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                const menu = document.getElementById('navMenu');
-                const backdrop = document.getElementById('menuBackdrop');
-                const hamburgerIcon = document.querySelector('.mobile-toggle i');
-                
-                if (menu) menu.classList.remove('active');
-                if (backdrop) backdrop.classList.remove('active');
-                if (hamburgerIcon) hamburgerIcon.className = 'fa-solid fa-bars';
-            }
-        });
 
         function renderProjects() {
             const container = document.getElementById('projectsGrid');
